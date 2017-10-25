@@ -21,16 +21,17 @@ export class User {
 }
 
 export class Book {
-  constructor(id, title, description, year_published, image, language) {
+  constructor(id, isbn, title, description, year_published, image, language) {
     this.id = id;
+    this.isbn = isbn;
     this.title = title;
     this.description = description;
     this.year_published = year_published;
     this.image = image;
     this.language = language;
   }
-
   id = '';
+  isbn = '';
   title = '';
   description = '';
   year_published = '';

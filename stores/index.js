@@ -1,5 +1,12 @@
 import { observable, action, computed, autorun } from 'mobx';
 import { StyleSheet, Text, View, Button, ALert } from 'react-native';
+import {
+  User,
+  Book,
+  Author,
+  Library,
+  Order
+} from '../models';
 
 class HomeStore {
   constructor(rootStore) {

@@ -1,6 +1,12 @@
 import React from 'react';
 import Expo from 'expo';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+
+import {
+  Text,
+  Bold
+} from '../components/common';
+
 import BaseScreen from '../components/BaseScreen';
 
 export default class HomeScreen extends React.Component {
@@ -14,7 +20,7 @@ export default class HomeScreen extends React.Component {
 
     return (
       <BaseScreen>
-        <Text>HELLOW EVERBODEY</Text>
+        <Text>Hai, Irfan!</Text>
         <Text>CEMMANA INI</Text>
       </BaseScreen>
     );
