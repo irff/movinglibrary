@@ -11,8 +11,8 @@ import BaseScreen from '../components/BaseScreen';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    drawerLabel: 'Home',
-    drawerIcon: null
+    tabBarLabel: 'Home',
+    tabBarIcon: null
   };
 
   render() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { StackNavigator } from 'react-navigation';
+import { StackNavigator, TabNavigator } from 'react-navigation';
 import { Font } from 'expo';
 
 import HomeScreen from './screens/Home';
@@ -36,22 +36,22 @@ export default class App extends React.Component {
     }
 }
 
-const Navigator = StackNavigator({
+const Navigator = TabNavigator({
   home: {
     screen: HomeScreen
   },
   // login: {
   //   screen: LoginScreen
   // },
-  // chat: {
-  //   screen: ChatScreen
-  // },
+  chat: {
+    screen: ChatScreen
+  },
   // chatList: {
   //   screen: ChatListScreen
   // },
-  // profile: {
-  //   screen: ProfileScreen
-  // },
+  profile: {
+    screen: ProfileScreen
+  },
   // search: {
   //   screen: SearchScreen
   // },
@@ -62,6 +62,12 @@ const Navigator = StackNavigator({
   //   screen: SplashScreen
   // }
 }, {
-  initialRouteName: 'home',
-  headerMode: 'none'
+  tabBarPosition: 'bottom',
+  animationEnabled: true,
+  tabBarOptions: {
+    activeTintColor: '#e91e63',
+    style: {
+      backgroundColor: 'blue',
+    }
+  }
 });
