@@ -41,9 +41,9 @@ const Navigator = TabNavigator({
   home: {
     screen: HomeScreen
   },
-  // login: {
-  //   screen: LoginScreen
-  // },
+  login: {
+    screen: LoginScreen
+  },
   chat: {
     screen: ChatScreen
   },
