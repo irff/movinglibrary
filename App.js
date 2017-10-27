@@ -2,6 +2,9 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator, TabNavigator } from 'react-navigation';
 import { Font } from 'expo';
+import { Provider } from 'mobx-react'
+
+import store from './stores';
 
 import HomeScreen from './screens/Home';
 import LoginScreen from './screens/Login';
@@ -30,7 +33,9 @@ export default class App extends React.Component {
   render() {
     if (this.state.fontLoaded) {
       return (
-        <Navigator />
+        <Provider store={store}>
+          <Navigator />
+        </Provider>
       );
     }
     return null;
