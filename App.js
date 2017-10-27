@@ -12,6 +12,7 @@ import SearchResultScreen from './screens/SearchResult';
 import SearchScreen from './screens/Search';
 import CheckoutScreen from './screens/Checkout';
 import SplashScreen from './screens/Splash';
+import BookScanScreen from './screens/BookScan';
 
 export default class App extends React.Component {
   state = {
@@ -52,6 +53,11 @@ const Navigator = TabNavigator({
   profile: {
     screen: ProfileScreen
   },
+
+  bookScan: {
+    screen: BookScanScreen,
+  },
+  
   // search: {
   //   screen: SearchScreen
   // },
