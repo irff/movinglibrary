@@ -1,6 +1,6 @@
 import React from 'react';
 import Expo, { BarCodeScanner, Permissions} from 'expo';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Image, Button } from 'react-native';
 import styled from 'styled-components/native';
 
 import {
@@ -10,6 +10,7 @@ import {
   Container,
   Flex,
 } from '../components/common';
+import * as theme from '../constants/theme'
 
 import BaseScreen from '../components/BaseScreen';
 
@@ -60,15 +61,28 @@ export default class BookScanScreen extends React.Component {
         </Flex>
         <View>
           {!!this.state.isbn &&
-            <Container style={{ position: 'absolute', bottom: 0, left: 0, right: 0, elevation: 2, margin: 16 }}>
-              <View>
-                <Text>{this.state.isbn}</Text>
+            <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, elevation: 2}}>
+              <Container>
                 {this.state.loading && <Text>Loading...</Text>}
                 {!!this.state.data && !this.state.loading &&
-                  <Text>{this.state.data.volumeInfo.title}</Text>
+                  <View style={{ flexDirection: 'row'}}>
+                    <View style={{ width: 85, height: 120  }}>
+                      <Image source={{ uri: this.state.data.volumeInfo.imageLinks.thumbnail, width: 85, height: 120, resizeMode: 'contain' }} />
+                    </View>
+                    <Flex style={{ marginLeft: 16 }}>
+                      <Bold numberOfLines={2} style={{ color: theme.teal, fontSize: 14 }}>{this.state.data.volumeInfo.title}</Bold>
+                      <Text style={{ marginBottom: 8 }}>by {this.state.data.volumeInfo.authors.join(', ')}</Text>
+                      {this.state.data.volumeInfo.industryIdentifiers.map(id =>
+                        <Text key={id.type}>{`${id.type.replace('_', '')} ${id.identifier}`}</Text>
+                      )}
+                    </Flex>
+                  </View>
                 }
-              </View>
-            </Container>
+              </Container>
+              <Container style={{ elevation: 4 }}>
+                <Button title="Tambah Buku" />
+              </Container>
+            </View>
           }
         </View>
       </BaseScreen>
