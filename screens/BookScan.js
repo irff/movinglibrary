@@ -52,16 +52,16 @@ export default class BookScanScreen extends React.Component {
         <Container style={{ position: 'absolute', top: 0, elevation: 2, width: '100%' }}>
           <Heading>Tambah Buku</Heading>
         </Container>
-        <Flex>
+        <Flex style={{elevation: 0}}>
           <BarCodeScanner
             onBarCodeRead={this._handleBarCodeRead}
             style={StyleSheet.absoluteFill}
             barCodeTypes={[BarCodeScanner.Constants.BarCodeType.ean13]}
           />
         </Flex>
-        <View>
+        <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, elevation: 2 }}>
           {!!this.state.isbn &&
-            <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, elevation: 2}}>
+            <View>
               <Container>
                 {this.state.loading && <Text>Loading...</Text>}
                 {!!this.state.data && !this.state.loading &&
