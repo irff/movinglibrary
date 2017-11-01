@@ -22,6 +22,8 @@ export default class BookScanScreen extends React.Component {
   state = {
     hasCameraPermission: null,
     isbn: '',
+    loading: false,
+    data: null,
   };
 
   async componentWillMount() {
@@ -29,9 +31,15 @@ export default class BookScanScreen extends React.Component {
     this.setState({ hasCameraPermission: status === 'granted' });
   }
 
-  _handleBarCodeRead = ({ data }) => {
+  _handleBarCodeRead = async ({ data }) => {
     if (this.state.isbn !== data) {
-      this.setState({ isbn: data })
+      this.setState({ loading: true, isbn: data })
+      const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${data}`)
+      const json = await response.json()
+      this.setState({
+        loading: false,
+        data: json.items[0],
+      })
     }
   }
 
@@ -40,7 +48,7 @@ export default class BookScanScreen extends React.Component {
 
     return (
       <BaseScreen>
-        <Container>
+        <Container style={{ position: 'absolute', top: 0, elevation: 2, width: '100%' }}>
           <Heading>Tambah Buku</Heading>
         </Container>
         <Flex>
@@ -50,6 +58,19 @@ export default class BookScanScreen extends React.Component {
             barCodeTypes={[BarCodeScanner.Constants.BarCodeType.ean13]}
           />
         </Flex>
+        <View>
+          {!!this.state.isbn &&
+            <Container style={{ position: 'absolute', bottom: 0, left: 0, right: 0, elevation: 2, margin: 16 }}>
+              <View>
+                <Text>{this.state.isbn}</Text>
+                {this.state.loading && <Text>Loading...</Text>}
+                {!!this.state.data && !this.state.loading &&
+                  <Text>{this.state.data.volumeInfo.title}</Text>
+                }
+              </View>
+            </Container>
+          }
+        </View>
       </BaseScreen>
     );
   }
