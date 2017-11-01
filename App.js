@@ -68,9 +68,9 @@ const Navigator = TabNavigator({
   // search: {
   //   screen: SearchScreen
   // },
-  // searchResult: {
-  //   screen: SearchResultScreen
-  // },
+  searchResult: {
+    screen: SearchResultScreen
+  },
   // splash: {
   //   screen: SplashScreen
   // }
