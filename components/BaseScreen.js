@@ -2,10 +2,11 @@ import React from 'react';
 import { KeyboardAvoidingView } from 'react-native';
 import styled from 'styled-components/native';
 import { Constants } from 'expo';
+import * as theme from '../constants/theme'
 
 const StatusBarView = styled.View`
   padding-top: ${Constants.statusBarHeight};
-  background-color: #000;
+  background-color: ${theme.darkTeal};
 `;
 
 const Screen = styled.View`

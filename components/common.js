@@ -10,6 +10,10 @@ export const Bold = styled.Text`
   font-family: cerebri-extra-bold;
 `;
 
+export const Row = styled.View`
+  flex-direction: row;
+`;
+
 export const Heading = styled(Bold)`
   font-size: 36;
 `;

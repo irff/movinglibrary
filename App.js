@@ -4,6 +4,8 @@ import { StackNavigator, TabNavigator } from 'react-navigation';
 import { Font } from 'expo';
 import { Provider } from 'mobx-react'
 
+import * as theme from './constants/theme'
+
 import store from './stores';
 
 import HomeScreen from './screens/Home';
@@ -75,10 +77,11 @@ const Navigator = TabNavigator({
 }, {
   tabBarPosition: 'bottom',
   animationEnabled: true,
+  swipeEnabled: false,
   tabBarOptions: {
     activeTintColor: '#e91e63',
     style: {
-      backgroundColor: 'blue',
+      backgroundColor: theme.darkTeal,
     }
   }
 });
