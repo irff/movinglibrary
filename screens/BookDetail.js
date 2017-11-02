@@ -52,6 +52,16 @@ export default class BookDetailScreen extends React.Component {
           </View>
 
           <Container>
+            <Row style={{ marginBottom: 8 }}>
+              <Bold style={{ fontSize: 16 }}>Deskripsi</Bold>
+            </Row>
+            <Text>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+          </Container>
+
+          <Divider style={{ backgroundColor: theme.divider, height: 2, marginLeft: 16, marginRight: 16 }} />
+
+
+          <Container>
             <Row>
               <Bold style={{ fontSize: 16 }}>Kategori</Bold>
               <Flex>
@@ -79,9 +89,6 @@ export default class BookDetailScreen extends React.Component {
         </ScrollView>
         <Container style={{ backgroundColor: theme.white, elevation: 4 }}>
           <Row>
-            <Flex style={{ marginRight: 12 }}>
-              <SecondaryButton title="Chat Pemilik" />
-            </Flex>
             <Flex>
               <Button title="Pinjam" />
             </Flex>
