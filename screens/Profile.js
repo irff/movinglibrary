@@ -63,8 +63,8 @@ export default class ProfileScreen extends React.Component {
               initialRegion={{
                 latitude: 37.78825,
                 longitude: -122.4324,
-                latitudeDelta: 0.05,
-                longitudeDelta: 0.05,
+                latitudeDelta: 0.04,
+                longitudeDelta: 0.04,
               }}
             >
               <MapView.Circle
@@ -74,7 +74,7 @@ export default class ProfileScreen extends React.Component {
                 }}
                 radius={1000}
                 strokeColor="transparent"
-                fillColor="rgba(120, 120, 255, 0.5)"
+                fillColor="rgba(120, 210, 255, 0.4)"
               />
             </MapView>
           </Container>
@@ -83,6 +83,18 @@ export default class ProfileScreen extends React.Component {
 
           <Container>
             <SectionHeading>Review</SectionHeading>
+            <Row style={{ alignItems: 'center' }}>
+              <Avatar medium rounded source={{ uri: 'http://i.pravatar.cc/200' }} />
+              <Flex style={{ marginLeft: 12 }}>
+                <Text><Bold>Tito •</Bold> Tebet, Jakarta Selatan</Text>
+                <Row style={{ alignItems: 'center' }}>
+                  <Ionicons name="md-thumbs-up" color={theme.darkTeal} size={18} />
+                  <Text style={{ fontSize: 12, color: theme.gray, marginLeft: 8 }}>Sangat Baik - 4/5</Text>
+                </Row>
+              </Flex>
+            </Row>
+            <Text style={{ marginTop: 16 }}>“Shylla ini cepat tanggap, dia sangat bertanggung jawab ketika meminjam buku saya.”</Text>
+            <Text style={{ marginTop: 22, color: theme.darkTeal }}>Lihat semua review</Text>
           </Container>
 
         </ScrollView>
