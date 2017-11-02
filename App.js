@@ -20,6 +20,7 @@ import SplashScreen from './screens/Splash';
 import BookScanScreen from './screens/BookScan';
 import BookDetailScreen from './screens/BookDetail';
 import PinjamanScreen from './screens/Pinjaman';
+import CollectionScreen from './screens/Collection';
 
 const HomeNavigator = StackNavigator({
   explore: {
@@ -38,6 +39,9 @@ const MainNavigator = TabNavigator({
   home: {
     screen: HomeNavigator
   },
+  collection: {
+    screen: CollectionScreen
+  },
   pinjaman: {
     screen: PinjamanScreen
   },
@@ -52,10 +56,6 @@ const MainNavigator = TabNavigator({
   // },
   profile: {
     screen: ProfileScreen
-  },
-
-  bookScan: {
-    screen: BookScanScreen,
   },
   
   // search: {
@@ -95,6 +95,9 @@ const RootNavigator = StackNavigator({
   },
   checkout: {
     screen: CheckoutScreen,
+  },
+  bookScan: {
+    screen: BookScanScreen,
   },
 },
 {

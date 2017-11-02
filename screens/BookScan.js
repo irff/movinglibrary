@@ -81,7 +81,7 @@ export default class BookScanScreen extends React.Component {
                 }
               </Container>
               <Container>
-                <Button title="+ Tambah Buku" />
+                <Button title="+ Tambah Buku" onPress={() => navigate('collection')} />
               </Container>
             </View>
           }
