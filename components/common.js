@@ -19,7 +19,6 @@ export const Heading = styled(Bold)`
 `;
 
 export const Container = styled.View`
-  background-color: ${theme.white};
   padding-top: 16;
   padding-bottom: 16;
   padding-left: 16;

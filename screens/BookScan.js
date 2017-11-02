@@ -49,7 +49,7 @@ export default class BookScanScreen extends React.Component {
 
     return (
       <BaseScreen>
-        <Container style={{ position: 'absolute', top: 0, elevation: 2, width: '100%' }}>
+        <Container style={{ backgroundColor: theme.white, position: 'absolute', top: 0, elevation: 2, width: '100%' }}>
           <Heading>Tambah Buku</Heading>
         </Container>
         <Flex style={{elevation: 0}}>

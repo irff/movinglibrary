@@ -1,6 +1,6 @@
 import React from 'react';
 import Expo from 'expo';
-import { StyleSheet, View, ScrollView, Image } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, TouchableOpacity } from 'react-native';
 import * as theme from '../constants/theme'
 
 import {
@@ -38,20 +38,22 @@ export default class HomeScreen extends React.Component {
           placeholderTextColor={theme.white}
           icon={{ color: theme.white }}
         />
-        <ScrollView>
+        <ScrollView style={{ backgroundColor: theme.white }}>
           <Container>
             <Heading>Hai, Irfan!</Heading>
             <Text style={{ fontSize: 14 }}>Jelajahi kategori buku yang kamu inginkan </Text>
           </Container>
-          <ScrollView horizontal style={{ flexGrow: 0, flexShrink: 0 }}>
+          <ScrollView horizontal style={{ flexGrow: 0, flexShrink: 0, backgroundColor: theme.white }}>
             <View style={{ width: 16 }} />
-            <View style={{ borderRadius: 4, width: 111, height: 68, marginRight: 8 }}>
-              <Image
-                source={IlluBisnis}
-                style={{ position: 'absolute', width: 111, height: 68, borderRadius: 4 }}
-              />
-              <CategoryTitle>Bisnis</CategoryTitle>
-            </View>
+            <TouchableOpacity onPress={() => navigate('searchResult')}>
+              <View style={{ borderRadius: 4, width: 111, height: 68, marginRight: 8 }}>
+                <Image
+                  source={IlluBisnis}
+                  style={{ position: 'absolute', width: 111, height: 68, borderRadius: 4 }}
+                />
+                <CategoryTitle>Bisnis</CategoryTitle>
+              </View>
+            </TouchableOpacity>
 
             <View style={{ borderRadius: 4, width: 111, height: 68, marginRight: 8 }}>
               <Image
@@ -95,7 +97,7 @@ export default class HomeScreen extends React.Component {
               </Flex>
             </Row>
           </Container>
-          <ScrollView horizontal style={{ flexGrow: 0, flexShrink: 0 }}>
+          <ScrollView horizontal style={{ flexGrow: 0, flexShrink: 0, backgroundColor: theme.white }}>
             <View style={{ width: 16 }} />
             <View style={{ maxWidth: 132, marginRight: 8 }}>
               <Image source={BookCoverPlaceholder} style={{ height: 200, width: 132 }} resizeMode="contain" />
@@ -133,7 +135,7 @@ export default class HomeScreen extends React.Component {
               </Flex>
             </Row>
           </Container>
-          <ScrollView horizontal style={{ flexGrow: 0, flexShrink: 0 }}>
+          <ScrollView horizontal style={{ flexGrow: 0, flexShrink: 0, backgroundColor: theme.white }}>
             <View style={{ width: 16 }} />
             <View style={{ maxWidth: 132, marginRight: 8 }}>
               <Image source={BookCoverPlaceholder} style={{ height: 200, width: 132 }} resizeMode="contain" />

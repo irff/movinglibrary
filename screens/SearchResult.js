@@ -1,6 +1,6 @@
 import React from 'react';
 import Expo from 'expo';
-import { StyleSheet, View, ScrollView, Image } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, TouchableOpacity } from 'react-native';
 
 import {
   Text,
@@ -42,21 +42,23 @@ export default class SearchResultScreen extends React.Component {
             <Text><Bold>5</Bold> hasil pencarian, <Bold>3</Bold> tersedia</Text>
           </Container>
           <Container>
-            <Card>
-              <Image
-                source={BookCoverPlaceholder}
-                style={{ height: 90, width: 70, borderTopLeftRadius: 2, borderBottomLeftRadius: 2 }}
-                resizeMode="cover"
-              />
-              <Flex style={{ padding: 12 }}>
-                <Bold style={{ color: theme.teal, fontSize: 14 }} numberOfLines={1}>Einstein: His Life and Universe</Bold>
-                <Text style={{ fontSize: 12 }}>WALTER ISAACSON</Text>
-                <Text style={{ fontSize: 12 }}><Bold>Ilyas Fahreza •</Bold> Beji, Depok</Text>
-                <Flex style={{ justifyContent: 'flex-end' }}>
-                  <Text style={{ fontSize: 12, color: theme.teal }}>0,5 KM</Text>
+            <TouchableOpacity onPress={() => navigate('bookDetail')}>
+              <Card>
+                <Image
+                  source={BookCoverPlaceholder}
+                  style={{ height: 90, width: 70, borderTopLeftRadius: 2, borderBottomLeftRadius: 2 }}
+                  resizeMode="cover"
+                />
+                <Flex style={{ padding: 12 }}>
+                  <Bold style={{ color: theme.teal, fontSize: 14 }} numberOfLines={1}>Einstein: His Life and Universe</Bold>
+                  <Text style={{ fontSize: 12 }}>WALTER ISAACSON</Text>
+                  <Text style={{ fontSize: 12 }}><Bold>Ilyas Fahreza •</Bold> Beji, Depok</Text>
+                  <Flex style={{ justifyContent: 'flex-end' }}>
+                    <Text style={{ fontSize: 12, color: theme.teal }}>0,5 KM</Text>
+                  </Flex>
                 </Flex>
-              </Flex>
-            </Card>
+              </Card>
+            </TouchableOpacity>
 
             <Card>
               <Image
