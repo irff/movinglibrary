@@ -35,21 +35,22 @@ class Meminjam extends React.Component {
     tabBarIcon: null,
   };
 
-  componentDidMount() {
+  state = {
+    loaded: false,
   }
+
+  async componentDidMount() {
+    this.props.store.pinjamanStore.getOrders();
+    this.setState({ loaded: true })
+  }
+
   render() {
     const { navigate } = this.props.screenProps.parentNavigation;
-
-    if (this.props.store.userStore.user) {
-      console.log("user loaded");
-      this.props.store.pinjamanStore.getOrders();
-      console.log("orders loaded");
-    }
 
     return (
       <ScrollView>
         <Container>
-        {this.props.store.pinjamanStore.borrows.map(item =>
+        {this.state.loaded && this.props.store.pinjamanStore.borrows.map(item =>
           <TouchableOpacity onPress={() => navigate('pinjamDetail')} activeOpacity={0.7}>
             <Card>
               <Image
@@ -82,19 +83,22 @@ class Dipinjam extends React.Component {
     tabBarIcon: null
   };
 
+  state = {
+    loaded: false,
+  }
+
+  async componentDidMount() {
+    this.props.store.pinjamanStore.getOrders();
+    this.setState({ loaded: true })
+  }
+
   render() {
     const { navigate } = this.props.screenProps.parentNavigation;
-
-    if (this.props.store.userStore.user) {
-      console.log("user loaded");
-      this.props.store.pinjamanStore.getOrders();
-      console.log("orders loaded");
-    }
 
     return (
       <ScrollView>
       <Container>
-      {this.props.store.pinjamanStore.lends.map(item =>
+      {this.state.loaded && this.props.store.pinjamanStore.lends.map(item =>
         <TouchableOpacity onPress={() => navigate('pinjamDetail')} activeOpacity={0.7}>
           <Card>
             <Image

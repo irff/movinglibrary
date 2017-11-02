@@ -16,6 +16,30 @@ class HomeStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
   }
+
+  @observable popular = []
+  @observable latest = []
+  @observable searchResult = []
+
+  async fetchHome() {
+    const response = await fetch(`${API_URL}records`, {
+      headers: {
+        Authorization: this.rootStore.userStore.user.token,
+      }
+    })
+    const response_json = await response.json()
+    this.popular = this.latest = response_json.records.filter(r => !!r.book.image)
+  }
+
+  async search(query) {
+    const response = await fetch(`${API_URL}records?q=${query}`, {
+      headers: {
+        Authorization: this.rootStore.userStore.user.token,
+      }
+    })
+    const response_json = await response.json()
+    this.searchResult = response_json.records.filter(r => !!r.book.image)
+  }
 }
 
 class LibraryStore {
@@ -171,6 +195,7 @@ class RootStore {
     this.userStore = new UserStore(this);
     this.pinjamanStore = new PinjamanStore(this);
     this.libraryStore = new LibraryStore(this)
+    this.homeStore = new HomeStore(this)
   }
 }
 

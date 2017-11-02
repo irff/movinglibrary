@@ -1,6 +1,6 @@
 import React from 'react';
 import Expo from 'expo';
-import { StyleSheet, View, ScrollView, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ScrollView, Image, TouchableOpacity, ActivityIndicator } from 'react-native';
 import * as theme from '../constants/theme'
 
 import {
@@ -41,6 +41,19 @@ export default class HomeScreen extends React.Component {
       )),
   };
 
+  state = {
+    loaded: false
+  }
+  
+  async componentDidMount() {
+    await this.props.store.homeStore.fetchHome();
+    this.setState({ loaded: true })
+  }
+
+  search = e => {
+    this.props.navigation.navigate('searchResult', { query: e.nativeEvent.text })
+  }
+
   render() {
     const { navigate } = this.props.navigation;
 
@@ -53,6 +66,7 @@ export default class HomeScreen extends React.Component {
           inputStyle={{ backgroundColor: theme.teal, color: theme.white, textAlign: 'center' }}
           placeholderTextColor={theme.white}
           icon={{ color: theme.white }}
+          onSubmitEditing={this.search}
         />
         <ScrollView style={{ backgroundColor: theme.white }}>
           <Container>
@@ -61,7 +75,7 @@ export default class HomeScreen extends React.Component {
           </Container>
           <ScrollView horizontal style={{ flexGrow: 0, flexShrink: 0, backgroundColor: theme.white }}>
             <View style={{ width: 16 }} />
-            <TouchableOpacity onPress={() => navigate('searchResult')}>
+            <TouchableOpacity onPress={() => navigate('searchResult', {query: 'Bisnis'} )}>
               <View style={{ borderRadius: 4, width: 111, height: 68, marginRight: 8 }}>
                 <Image
                   source={IlluBisnis}
@@ -112,32 +126,13 @@ export default class HomeScreen extends React.Component {
           </Container>
           <ScrollView horizontal style={{ flexGrow: 0, flexShrink: 0, backgroundColor: theme.white }}>
             <View style={{ width: 16 }} />
-            <View style={{ maxWidth: 132, marginRight: 8 }}>
-              <Image source={BookCoverPlaceholder} style={{ height: 200, width: 132 }} resizeMode="contain" />
-              <Bold numberOfLines={1}>Rediscovering Americanism</Bold>
-              <Text numberOfLines={1}>oleh Mark Robert Levin</Text>
-            </View>
-            <View style={{ maxWidth: 132, marginRight: 8 }}>
-              <Image source={BookCoverPlaceholder} style={{ height: 200, width: 132 }} resizeMode="contain" />
-              <Bold numberOfLines={1}>Rediscovering Americanism</Bold>
-              <Text numberOfLines={1}>oleh Mark Robert Levin</Text>
-            </View>
-            <View style={{ maxWidth: 132, marginRight: 8 }}>
-              <Image source={BookCoverPlaceholder} style={{ height: 200, width: 132 }} resizeMode="contain" />
-              <Bold numberOfLines={1}>Rediscovering Americanism</Bold>
-              <Text numberOfLines={1}>oleh Mark Robert Levin</Text>
-            </View>
-            <View style={{ maxWidth: 132, marginRight: 8 }}>
-              <Image source={BookCoverPlaceholder} style={{ height: 200, width: 132 }} resizeMode="contain" />
-              <Bold numberOfLines={1}>Rediscovering Americanism</Bold>
-              <Text numberOfLines={1}>oleh Mark Robert Levin</Text>
-            </View>
-            <View style={{ maxWidth: 132, marginRight: 8 }}>
-              <Image source={BookCoverPlaceholder} style={{ height: 200, width: 132 }} resizeMode="contain" />
-              <Bold numberOfLines={1}>Rediscovering Americanism</Bold>
-              <Text numberOfLines={1}>oleh Mark Robert Levin</Text>
-            </View>
-            
+            {!this.state.loaded && <ActivityIndicator />}
+            {this.state.loaded && this.props.store.homeStore.popular.map(record =>
+              <View style={{ maxWidth: 132, marginRight: 8 }} key={record.id}>
+                <Image source={{ uri: record.book.image }} style={{ height: 200, width: 132 }} resizeMode="contain" />
+                <Bold numberOfLines={1}>{record.book.title}</Bold>
+                <Text numberOfLines={1}>oleh {record.book.authors}</Text>
+            </View>)}
           </ScrollView>
 
           <Container>
@@ -150,32 +145,13 @@ export default class HomeScreen extends React.Component {
           </Container>
           <ScrollView horizontal style={{ flexGrow: 0, flexShrink: 0, backgroundColor: theme.white }}>
             <View style={{ width: 16 }} />
-            <View style={{ maxWidth: 132, marginRight: 8 }}>
-              <Image source={BookCoverPlaceholder} style={{ height: 200, width: 132 }} resizeMode="contain" />
-              <Bold numberOfLines={1}>Rediscovering Americanism</Bold>
-              <Text numberOfLines={1}>oleh Mark Robert Levin</Text>
-            </View>
-            <View style={{ maxWidth: 132, marginRight: 8 }}>
-              <Image source={BookCoverPlaceholder} style={{ height: 200, width: 132 }} resizeMode="contain" />
-              <Bold numberOfLines={1}>Rediscovering Americanism</Bold>
-              <Text numberOfLines={1}>oleh Mark Robert Levin</Text>
-            </View>
-            <View style={{ maxWidth: 132, marginRight: 8 }}>
-              <Image source={BookCoverPlaceholder} style={{ height: 200, width: 132 }} resizeMode="contain" />
-              <Bold numberOfLines={1}>Rediscovering Americanism</Bold>
-              <Text numberOfLines={1}>oleh Mark Robert Levin</Text>
-            </View>
-            <View style={{ maxWidth: 132, marginRight: 8 }}>
-              <Image source={BookCoverPlaceholder} style={{ height: 200, width: 132 }} resizeMode="contain" />
-              <Bold numberOfLines={1}>Rediscovering Americanism</Bold>
-              <Text numberOfLines={1}>oleh Mark Robert Levin</Text>
-            </View>
-            <View style={{ maxWidth: 132, marginRight: 8 }}>
-              <Image source={BookCoverPlaceholder} style={{ height: 200, width: 132 }} resizeMode="contain" />
-              <Bold numberOfLines={1}>Rediscovering Americanism</Bold>
-              <Text numberOfLines={1}>oleh Mark Robert Levin</Text>
-            </View>
-            
+            {!this.state.loaded && <ActivityIndicator />}
+            {this.state.loaded && this.props.store.homeStore.latest.map(record =>
+              <View style={{ maxWidth: 132, marginRight: 8 }} key={record.id}>
+                <Image source={{ uri: record.book.image }} style={{ height: 200, width: 132 }} resizeMode="contain" />
+                <Bold numberOfLines={1}>{record.book.title}</Bold>
+                <Text numberOfLines={1}>oleh {record.book.authors}</Text>
+            </View>)}
           </ScrollView>
 
           <Container />
