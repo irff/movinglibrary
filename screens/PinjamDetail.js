@@ -98,7 +98,7 @@ export default class PinjamDetailScreen extends React.Component {
         <Container style={{ backgroundColor: theme.white, elevation: 4 }}>
           <Row>
             <Flex>
-              <Button title="Dikembalikan" />
+              <Button title="Dikembalikan" onPress={() => navigate('review')} />
             </Flex>
           </Row>
         </Container>

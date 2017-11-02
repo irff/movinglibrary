@@ -22,6 +22,7 @@ import BookDetailScreen from './screens/BookDetail';
 import PinjamanScreen from './screens/Pinjaman';
 import CollectionScreen from './screens/Collection';
 import PinjamDetailScreen from './screens/PinjamDetail';
+import ReviewScreen from './screens/Review';
 
 const HomeNavigator = StackNavigator({
   explore: {
@@ -87,6 +88,9 @@ const MainNavigator = TabNavigator({
 });
 
 const RootNavigator = StackNavigator({
+  login: {
+    screen: LoginScreen,
+  },
   main: {
     screen: MainNavigator,
   },
@@ -95,6 +99,9 @@ const RootNavigator = StackNavigator({
   },
   pinjamDetail: {
     screen: PinjamDetailScreen,
+  },
+  review: {
+    screen: ReviewScreen,
   },
   checkout: {
     screen: CheckoutScreen,
@@ -108,7 +115,7 @@ const RootNavigator = StackNavigator({
 },
 {
   headerMode: 'none',
-  initialRouteName: 'main',
+  initialRouteName: 'login',
   navigationOptions: {
     gesturesEnabled: false,
   },

@@ -25,7 +25,10 @@ import { SearchBar, Divider, Avatar } from 'react-native-elements'
 import { mix } from 'polished'
 
 import BaseScreen from '../components/BaseScreen';
+import { observer, inject } from 'mobx-react';
 
+@inject('store')
+@observer
 export default class ProfileScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Profil',
@@ -45,18 +48,21 @@ export default class ProfileScreen extends React.Component {
   render() {
     const { navigate, goBack } = this.props.navigation;
 
+    const { name } = this.props.store.userStore.user.user;
+    const firstName = name.split(' ')[0];
+
     return (
       <BaseScreen>
         <ScrollView>
           <Image
-            source={{ uri: 'http://i.pravatar.cc/400"' }}
+            source={{ uri: this.props.store.userStore.user.user.avatar }}
             style ={{
               width: '100%',
               height: 255,
             }}
           />
           <Container>
-            <Heading>Shylla Estee P.</Heading>
+            <Heading>{this.props.store.userStore.user.user.name}</Heading>
             <Text style={{ fontSize: 18, marginBottom: 12 }}>Jakarta, Indonesia</Text>
             <Row style={{ alignItems: 'center' }}>
               <Bold style={{ backgroundColor: mix(4.48/5.0, theme.greenRating, theme.redRating), padding: 4, borderRadius: 4, color: theme.white, fontSize: 16 }}>4.48</Bold>
@@ -106,8 +112,68 @@ export default class ProfileScreen extends React.Component {
                 </Row>
               </Flex>
             </Row>
-            <Text style={{ marginTop: 16 }}>“Shylla ini cepat tanggap, dia sangat bertanggung jawab ketika meminjam buku saya.”</Text>
+            <Text style={{ marginTop: 16 }}>“{firstName} ini cepat tanggap, dia sangat bertanggung jawab ketika meminjam buku saya.”</Text>
             <Text style={{ marginTop: 22, color: theme.darkTeal }}>Lihat semua review</Text>
+          </Container>
+
+          <Divider style={{ height: 2, backgroundColor: theme.divider, marginLeft: 16, marginRight: 16 }} />
+          <Container>
+            <SectionHeading>Tentang {firstName}</SectionHeading>
+
+            <StatisticCard>
+              <Flex>
+                <Text style={{ fontSize: 16 }}>{firstName} sudah membaca</Text>
+              </Flex>
+              <Flex style={{ marginLeft: 8 }}>
+                <StatisticNum>43</StatisticNum>
+                <StatisticUnit>buku</StatisticUnit>
+              </Flex>
+              {/* <StatisticBackground source={stat.background} resizeMode="contain" /> */}
+            </StatisticCard>
+
+            <StatisticCard>
+              <Flex>
+                <Text style={{ fontSize: 16 }}>Total halaman yang dibaca</Text>
+              </Flex>
+              <Flex style={{ marginLeft: 8 }}>
+                <StatisticNum>32.5 K</StatisticNum>
+                <StatisticUnit>halaman</StatisticUnit>
+              </Flex>
+              {/* <StatisticBackground source={stat.background} resizeMode="contain" /> */}
+            </StatisticCard>
+
+            <StatisticCard>
+              <Flex>
+                <Text style={{ fontSize: 16 }}>Digabungkan, {firstName} membaca</Text>
+              </Flex>
+              <Flex style={{ marginLeft: 8 }}>
+                <StatisticNum>1.4 M</StatisticNum>
+                <StatisticUnit>kata</StatisticUnit>
+              </Flex>
+              {/* <StatisticBackground source={stat.background} resizeMode="contain" /> */}
+            </StatisticCard>
+
+            <StatisticCard>
+              <Flex>
+                <Text style={{ fontSize: 16 }}>{firstName} sudah mengoleksi</Text>
+              </Flex>
+              <Flex style={{ marginLeft: 8 }}>
+                <StatisticNum>14</StatisticNum>
+                <StatisticUnit>buku</StatisticUnit>
+              </Flex>
+              {/* <StatisticBackground source={stat.background} resizeMode="contain" /> */}
+            </StatisticCard>
+
+            <StatisticCard>
+              <Flex>
+                <Text style={{ fontSize: 16 }}>{firstName} telah meminjamkan bukunya</Text>
+              </Flex>
+              <Flex style={{ marginLeft: 8 }}>
+                <StatisticNum>98</StatisticNum>
+                <StatisticUnit>kali</StatisticUnit>
+              </Flex>
+              {/* <StatisticBackground source={stat.background} resizeMode="contain" /> */}
+            </StatisticCard>
           </Container>
 
         </ScrollView>
@@ -120,3 +186,29 @@ const SectionHeading = styled(Bold)`
   font-size: 16;
   margin-bottom: 8;
 `
+const StatisticCard = styled(Row)`
+  height: 120;
+  align-items: center;
+  background-color: ${theme.white};
+  padding-top: 24;
+  padding-bottom: 24;
+  padding-left: 32;
+  padding-right: 32;
+  margin-top: 12;
+  border-radius: 2;
+  elevation: 2;
+`;
+
+const StatisticBackground = styled.Image`
+  position: absolute;
+  right: 0;
+  height: 120;
+`;
+
+const StatisticNum = styled(Text)`
+  font-size: 36;
+`;
+
+const StatisticUnit = styled(Bold)`
+  font-size: 14;
+`;
