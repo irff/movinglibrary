@@ -128,11 +128,14 @@ export default class HomeScreen extends React.Component {
             <View style={{ width: 16 }} />
             {!this.state.loaded && <ActivityIndicator />}
             {this.state.loaded && this.props.store.homeStore.popular.map(record =>
-              <View style={{ maxWidth: 132, marginRight: 8 }} key={record.id}>
-                <Image source={{ uri: record.book.image }} style={{ height: 200, width: 132 }} resizeMode="contain" />
-                <Bold numberOfLines={1}>{record.book.title}</Bold>
-                <Text numberOfLines={1}>oleh {record.book.authors}</Text>
-            </View>)}
+              <TouchableOpacity activeOpacity={0.7} onPress={() => navigate('bookDetail', { record })}>
+                <View style={{ maxWidth: 132, marginRight: 8 }} key={record.id}>
+                  <Image source={{ uri: record.book.image }} style={{ height: 200, width: 132 }} resizeMode="contain" />
+                  <Bold numberOfLines={1}>{record.book.title}</Bold>
+                  <Text numberOfLines={1}>oleh {record.book.authors}</Text>
+                </View>
+              </TouchableOpacity>
+            )}
           </ScrollView>
 
           <Container>
@@ -147,11 +150,14 @@ export default class HomeScreen extends React.Component {
             <View style={{ width: 16 }} />
             {!this.state.loaded && <ActivityIndicator />}
             {this.state.loaded && this.props.store.homeStore.latest.map(record =>
-              <View style={{ maxWidth: 132, marginRight: 8 }} key={record.id}>
-                <Image source={{ uri: record.book.image }} style={{ height: 200, width: 132 }} resizeMode="contain" />
-                <Bold numberOfLines={1}>{record.book.title}</Bold>
-                <Text numberOfLines={1}>oleh {record.book.authors}</Text>
-            </View>)}
+              <TouchableOpacity activeOpacity={0.7} onPress={() => navigate('bookDetail', { record })} key={record.id}>
+                <View style={{ maxWidth: 132, marginRight: 8 }}>
+                  <Image source={{ uri: record.book.image }} style={{ height: 200, width: 132 }} resizeMode="contain" />
+                  <Bold numberOfLines={1}>{record.book.title}</Bold>
+                  <Text numberOfLines={1}>oleh {record.book.authors}</Text>
+                </View>
+              </TouchableOpacity>
+            )}
           </ScrollView>
 
           <Container />

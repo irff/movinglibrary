@@ -80,7 +80,7 @@ export default class SearchResultScreen extends React.Component {
             </Container>
             <Container>
               {searchResult.map(r =>
-                <TouchableOpacity onPress={() => navigate('bookDetail')} key={r.id}>
+                <TouchableOpacity onPress={() => navigate('bookDetail', { record: r })} key={r.id}>
                   <Card>
                     <Image
                       source={{ uri: r.book.image }}

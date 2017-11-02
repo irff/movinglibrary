@@ -29,6 +29,7 @@ export default class BookDetailScreen extends React.Component {
 
   render() {
     const { navigate, goBack } = this.props.navigation;
+    const { record } = this.props.navigation.state.params;
 
     return (
       <BaseScreen>
@@ -41,14 +42,14 @@ export default class BookDetailScreen extends React.Component {
           <Container style={{ backgroundColor: theme.darkTeal, height: 120, position: 'absolute', left: 0, right: 0 }} />
           <View style={{ elevation: 4, width: 147, height: 224, alignSelf: 'center' }}>
             <Image
-              source={BookCoverPlaceholder}
+              source={{ uri: record.book.image }}
               style={{ width: 147, height: 224 }}
             />
           </View>
           <View style={{ alignItems: 'center', padding: 16 }}>
-            <Bold style={{ color: theme.teal, fontSize: 20 }}>Einstein: His Life and Universe</Bold>
-            <Text style={{ marginBottom: 12 }}>WALTER ISAACSON</Text>
-            <Text style={{ color: theme.muted, fontSize: 12 }}>2007 · Oxford Publication · English</Text>
+            <Bold style={{ color: theme.teal, fontSize: 20 }}>{record.book.title}</Bold>
+            <Text style={{ marginBottom: 12 }}>{record.book.authors.toUpperCase()}</Text>
+            <Text style={{ color: theme.muted, fontSize: 12 }}>2010 · Oxford Publication · {record.book.language === 'id' ? 'Bahasa Indonesia' : 'English'}</Text>
           </View>
 
           <Container>
@@ -65,7 +66,7 @@ export default class BookDetailScreen extends React.Component {
             <Row>
               <Bold style={{ fontSize: 16 }}>Kategori</Bold>
               <Flex>
-                <Text style={{ textAlign: 'right', fontSize: 16, color: theme.teal }}>Biografi</Text>
+                <Text style={{ textAlign: 'right', fontSize: 16, color: theme.teal }}>{record.book.category}</Text>
               </Flex>
             </Row>
           </Container>
@@ -76,13 +77,13 @@ export default class BookDetailScreen extends React.Component {
             <Row>
               <Flex style={{ marginRight: 12 }}>
                 <Bold style={{ fontSize: 16 }}>Pemilik Buku</Bold>
-                <Text><Bold>Tito •</Bold> Tebet, Jakarta Selatan</Text>
+                <Text><Bold>{record.library.user.name.split(' ')[0]} •</Bold> Tebet, Jakarta Selatan</Text>
                 <Text style={{ fontSize: 12, color: theme.teal }}>0,5 KM</Text>
               </Flex>
               <Avatar
                 large
                 rounded
-                source={{uri: "http://i.pravatar.cc/300"}}
+                source={{uri: record.library.user.avatar }}
               />
             </Row>
           </Container>
