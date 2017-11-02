@@ -19,6 +19,7 @@ import CheckoutScreen from './screens/Checkout';
 import SplashScreen from './screens/Splash';
 import BookScanScreen from './screens/BookScan';
 import BookDetailScreen from './screens/BookDetail';
+import PinjamanScreen from './screens/Pinjaman';
 
 const HomeNavigator = StackNavigator({
   explore: {
@@ -37,12 +38,15 @@ const MainNavigator = TabNavigator({
   home: {
     screen: HomeNavigator
   },
-  login: {
-    screen: LoginScreen
+  pinjaman: {
+    screen: PinjamanScreen
   },
-  chat: {
-    screen: ChatScreen
-  },
+  // login: {
+  //   screen: LoginScreen
+  // },
+  // chat: {
+  //   screen: ChatScreen
+  // },
   // chatList: {
   //   screen: ChatListScreen
   // },
