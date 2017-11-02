@@ -22,6 +22,34 @@ class LibraryStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
   }
+
+  @observable library = []
+
+  async fetch() {
+    const response = await fetch(`${API_URL}libraries/me`, {
+      headers: {
+        Authorization: this.rootStore.userStore.user.token,
+      }
+    })
+
+    const response_json = await response.json()
+    this.library = response_json.library
+  }
+
+  async post(data) {
+    const response = await fetch(`${API_URL}records`, {
+      method: 'post',
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: this.rootStore.userStore.user.token,
+      }
+    })
+
+    const response_json = await response.json()
+    console.log(response_json)
+    await this.fetch()
+  }
 }
 
 class PinjamanStore {
@@ -119,6 +147,7 @@ class RootStore {
   constructor() {
     this.userStore = new UserStore(this);
     this.pinjamanStore = new PinjamanStore(this);
+    this.libraryStore = new LibraryStore(this)
   }
 }
 

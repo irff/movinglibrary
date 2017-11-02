@@ -15,7 +15,10 @@ import Button from '../components/Button'
 
 import BaseScreen from '../components/BaseScreen';
 import IlluBarCode from '../assets/illustrations/bars-code.png';
+import { observer, inject } from 'mobx-react';
 
+@inject('store')
+@observer
 export default class BookScanScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Scan',
@@ -52,6 +55,27 @@ export default class BookScanScreen extends React.Component {
         })
       }
     }
+  }
+
+  onBookAdd = async () => {
+    const { volumeInfo } = this.state.data
+    console.log({
+      image: volumeInfo.imageLinks.thumbnail,
+      title: volumeInfo.title,
+      authors:volumeInfo.authors.join(', '),
+      category: volumeInfo.categories[0],
+      language: volumeInfo.language,
+      isbn: this.state.isbn,
+    })
+    await this.props.store.libraryStore.post({
+      image: volumeInfo.imageLinks.thumbnail,
+      title: volumeInfo.title,
+      authors:volumeInfo.authors.join(', '),
+      category: volumeInfo.categories[0],
+      language: volumeInfo.language,
+      isbn: this.state.isbn,
+    })
+    this.props.navigation.navigate('collection')
   }
 
   render() {
@@ -97,7 +121,7 @@ export default class BookScanScreen extends React.Component {
                 }
               </Container>
               <Container>
-                <Button title="+ Tambah Buku" onPress={() => navigate('collection')} />
+                <Button title="+ Tambah Buku" onPress={this.onBookAdd} />
               </Container>
             </View>
           }
