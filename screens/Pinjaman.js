@@ -104,6 +104,8 @@ class Dipinjam extends React.Component {
   };
 
   render() {
+    const { navigate } = this.props.screenProps.parentNavigation;
+    
     return (
       <ScrollView>
       <Container>
