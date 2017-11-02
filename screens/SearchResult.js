@@ -80,7 +80,7 @@ export default class SearchResultScreen extends React.Component {
             </Container>
             <Container>
               {searchResult.map(r =>
-                <TouchableOpacity onPress={() => navigate('bookDetail')}>
+                <TouchableOpacity onPress={() => navigate('bookDetail')} key={r.id}>
                   <Card>
                     <Image
                       source={{ uri: r.book.image }}
@@ -90,7 +90,7 @@ export default class SearchResultScreen extends React.Component {
                     <Flex style={{ padding: 12 }}>
                       <Bold style={{ color: theme.teal, fontSize: 14 }} numberOfLines={1}>{ r.book.title }</Bold>
                       <Text style={{ fontSize: 12 }}>{r.book.authors.toUpperCase()}</Text>
-                      <Text style={{ fontSize: 12 }}><Bold>Ilyas Fahreza •</Bold> Beji, Depok</Text>
+                      <Text style={{ fontSize: 12 }}><Bold>{r.library.user.name} •</Bold> Beji, Depok</Text>
                       <Flex style={{ justifyContent: 'flex-end' }}>
                         <Text style={{ fontSize: 12, color: theme.teal }}>0,5 KM</Text>
                       </Flex>
