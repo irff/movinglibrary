@@ -38,7 +38,7 @@ class Meminjam extends React.Component {
     return (
       <ScrollView>
         <Container>
-          <TouchableOpacity onPress={() => navigate('bookDetail')} activeOpacity={0.7}>
+          <TouchableOpacity onPress={() => navigate('pinjamDetail')} activeOpacity={0.7}>
             <Card>
               <Image
                 source={BookCoverPlaceholder}
@@ -56,7 +56,7 @@ class Meminjam extends React.Component {
             </Card>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => navigate('bookDetail')} activeOpacity={0.7}>
+          <TouchableOpacity onPress={() => navigate('pinjamDetail')} activeOpacity={0.7}>
             <Card>
               <Image
                 source={BookCoverPlaceholder}
@@ -74,7 +74,7 @@ class Meminjam extends React.Component {
             </Card>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => navigate('bookDetail')} activeOpacity={0.7}>
+          <TouchableOpacity onPress={() => navigate('pinjamDetail')} activeOpacity={0.7}>
             <Card>
               <Image
                 source={BookCoverPlaceholder}
@@ -107,7 +107,7 @@ class Dipinjam extends React.Component {
     return (
       <ScrollView>
       <Container>
-        <TouchableOpacity onPress={() => navigate('bookDetail')} activeOpacity={0.7}>
+        <TouchableOpacity onPress={() => navigate('pinjamDetail')} activeOpacity={0.7}>
           <Card>
             <Image
               source={BookCoverPlaceholder}
@@ -125,7 +125,7 @@ class Dipinjam extends React.Component {
           </Card>
         </TouchableOpacity>
 
-        <TouchableOpacity onPress={() => navigate('bookDetail')} activeOpacity={0.7}>
+        <TouchableOpacity onPress={() => navigate('pinjamDetail')} activeOpacity={0.7}>
           <Card>
             <Image
               source={BookCoverPlaceholder}

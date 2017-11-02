@@ -14,6 +14,7 @@ import * as theme from '../constants/theme'
 import Button from '../components/Button'
 
 import BaseScreen from '../components/BaseScreen';
+import IlluBarCode from '../assets/illustrations/bars-code.png';
 
 export default class BookScanScreen extends React.Component {
   static navigationOptions = {
@@ -38,10 +39,18 @@ export default class BookScanScreen extends React.Component {
       this.setState({ loading: true, isbn: data })
       const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=isbn:${data}`)
       const json = await response.json()
-      this.setState({
-        loading: false,
-        data: json.items[0],
-      })
+      try {
+        this.setState({
+          loading: false,
+          data: json.items[0],
+        })
+      } catch(e) {
+        this.setState({
+          loading: false,
+          isbn: '',
+          data: null,
+        })
+      }
     }
   }
 
@@ -60,9 +69,16 @@ export default class BookScanScreen extends React.Component {
             barCodeTypes={[BarCodeScanner.Constants.BarCodeType.ean13]}
           />
         </Flex>
-        <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, elevation: 2, backgroundColor: theme.white }}>
+
+        <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, elevation: 2 }}>
+          {!this.state.isbn && 
+            <View style={{ alignItems: 'center' }}>
+              <Image source={IlluBarCode} style={{ width: 56, height: 36 }} />
+              <Text style={{ maxWidth: 250, marginTop: 18, marginBottom: 24, color: theme.white, textAlign: 'center' }}>Arahkan kamera pada bar-code ISBN buku yang akan Kamu tambahkan</Text>
+            </View>
+          }
           {!!this.state.isbn &&
-            <View>
+            <View style={{ backgroundColor: theme.white }}>
               <Container>
                 {this.state.loading && <Text>Loading...</Text>}
                 {!!this.state.data && !this.state.loading &&
