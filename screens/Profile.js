@@ -48,6 +48,9 @@ export default class ProfileScreen extends React.Component {
   render() {
     const { navigate, goBack } = this.props.navigation;
 
+    const { name } = this.props.store.userStore.user.user;
+    const firstName = name.split(' ')[0];
+
     return (
       <BaseScreen>
         <ScrollView>
@@ -109,17 +112,17 @@ export default class ProfileScreen extends React.Component {
                 </Row>
               </Flex>
             </Row>
-            <Text style={{ marginTop: 16 }}>“Shylla ini cepat tanggap, dia sangat bertanggung jawab ketika meminjam buku saya.”</Text>
+            <Text style={{ marginTop: 16 }}>“{firstName} ini cepat tanggap, dia sangat bertanggung jawab ketika meminjam buku saya.”</Text>
             <Text style={{ marginTop: 22, color: theme.darkTeal }}>Lihat semua review</Text>
           </Container>
 
           <Divider style={{ height: 2, backgroundColor: theme.divider, marginLeft: 16, marginRight: 16 }} />
           <Container>
-            <SectionHeading>Tentang Shylla</SectionHeading>
+            <SectionHeading>Tentang {firstName}</SectionHeading>
 
             <StatisticCard>
               <Flex>
-                <Text style={{ fontSize: 16 }}>Shylla sudah membaca</Text>
+                <Text style={{ fontSize: 16 }}>{firstName} sudah membaca</Text>
               </Flex>
               <Flex style={{ marginLeft: 8 }}>
                 <StatisticNum>43</StatisticNum>
@@ -141,7 +144,7 @@ export default class ProfileScreen extends React.Component {
 
             <StatisticCard>
               <Flex>
-                <Text style={{ fontSize: 16 }}>Digabungkan, Shylla membaca</Text>
+                <Text style={{ fontSize: 16 }}>Digabungkan, {firstName} membaca</Text>
               </Flex>
               <Flex style={{ marginLeft: 8 }}>
                 <StatisticNum>1.4 M</StatisticNum>
@@ -152,7 +155,7 @@ export default class ProfileScreen extends React.Component {
 
             <StatisticCard>
               <Flex>
-                <Text style={{ fontSize: 16 }}>Shylla mengoleksi</Text>
+                <Text style={{ fontSize: 16 }}>{firstName} sudah mengoleksi</Text>
               </Flex>
               <Flex style={{ marginLeft: 8 }}>
                 <StatisticNum>14</StatisticNum>
@@ -163,7 +166,7 @@ export default class ProfileScreen extends React.Component {
 
             <StatisticCard>
               <Flex>
-                <Text style={{ fontSize: 16 }}>Shylla telah meminjamkan bukunya</Text>
+                <Text style={{ fontSize: 16 }}>{firstName} telah meminjamkan bukunya</Text>
               </Flex>
               <Flex style={{ marginLeft: 8 }}>
                 <StatisticNum>98</StatisticNum>
