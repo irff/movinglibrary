@@ -65,10 +65,18 @@ const MainNavigator = TabNavigator({
   animationEnabled: true,
   swipeEnabled: false,
   tabBarOptions: {
-    activeTintColor: '#e91e63',
+    activeTintColor: theme.teal,
+    inactiveTintColor: theme.muted,
+    labelStyle: {
+      fontSize: 12,
+    },
     style: {
-      backgroundColor: theme.darkTeal,
-    }
+      backgroundColor: theme.white,
+      elevation: 6,
+    },
+    indicatorStyle: {
+      backgroundColor: theme.teal,
+    },
   }
 });
 
@@ -78,6 +86,9 @@ const RootNavigator = StackNavigator({
   },
   bookDetail: {
     screen: BookDetailScreen,
+  },
+  checkout: {
+    screen: CheckoutScreen,
   },
 },
 {
