@@ -24,6 +24,35 @@ class LibraryStore {
   }
 }
 
+class PinjamanStore {
+  constructor(rootStore) {
+    this.rootStore = rootStore;
+  }
+
+  @observable lends = [];
+  @observable borrows = [];
+  async getOrders(user_id) {
+    let token = this.rootStore.userStore.user.token;
+    console.log("token=" + token);
+
+    let headers = {
+      "Content-Type": "application/json",
+      "Authorization": token
+    };
+
+    let response = await fetch(API_URL + 'orders/me', {
+      method: 'get',
+      headers: new Headers(headers)
+    });
+
+    let response_json = await response.json();
+    this.lends = response_json.lends;
+    this.borrows = response_json.borrows;
+    console.log("lends=" + this.lends);
+    console.log("borrows=" + this.borrows);
+  }
+}
+
 class UserStore {
   constructor(rootStore) {
     this.rootStore = rootStore;
@@ -64,7 +93,7 @@ class UserStore {
       'access_token' : access_token
     };
 
-    let response = await fetch('http://movingbackend.herokuapp.com/' + 'auth/facebook', {
+    let response = await fetch(API_URL + 'auth/facebook', {
       method: 'post',
       body: JSON.stringify(data),
       headers: new Headers(headers)
@@ -80,6 +109,7 @@ class UserStore {
       user = await this.auth_backend(access_token);
       this.user = user;
       // TODO: save user to store
+      console.log(this.user);
       cb();
     }
   }
@@ -88,6 +118,7 @@ class UserStore {
 class RootStore {
   constructor() {
     this.userStore = new UserStore(this);
+    this.pinjamanStore = new PinjamanStore(this);
   }
 }
 

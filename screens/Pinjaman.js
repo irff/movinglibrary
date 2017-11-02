@@ -25,13 +25,23 @@ import PinjamIconActive from '../assets/images/icons/pinjam-ac.png';
 import styled from 'styled-components/native'
 import { SearchBar, Divider, Avatar } from 'react-native-elements'
 import BaseScreen from '../components/BaseScreen';
+import { observer, inject } from 'mobx-react';
 
+@inject('store')
+@observer
 class Meminjam extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Meminjam',
     tabBarIcon: null,
   };
 
+  componentDidMount() {
+    if (this.props.store.userStore.user) {
+      console.log("user loaded");
+      this.props.store.pinjamanStore.getOrders();
+      console.log("orders loaded");
+    }
+  }
   render() {
     const { navigate } = this.props.screenProps.parentNavigation;
 
@@ -105,7 +115,7 @@ class Dipinjam extends React.Component {
 
   render() {
     const { navigate } = this.props.screenProps.parentNavigation;
-    
+
     return (
       <ScrollView>
       <Container>
