@@ -1,6 +1,6 @@
 import React from 'react';
 import Expo, { BarCodeScanner, Permissions} from 'expo';
-import { StyleSheet, View, Image, Button } from 'react-native';
+import { StyleSheet, View, Image } from 'react-native';
 import styled from 'styled-components/native';
 
 import {
@@ -11,6 +11,7 @@ import {
   Flex,
 } from '../components/common';
 import * as theme from '../constants/theme'
+import Button from '../components/Button'
 
 import BaseScreen from '../components/BaseScreen';
 
@@ -59,7 +60,7 @@ export default class BookScanScreen extends React.Component {
             barCodeTypes={[BarCodeScanner.Constants.BarCodeType.ean13]}
           />
         </Flex>
-        <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, elevation: 2 }}>
+        <View style={{ position: 'absolute', bottom: 0, left: 0, right: 0, elevation: 2, backgroundColor: theme.white }}>
           {!!this.state.isbn &&
             <View>
               <Container>
@@ -79,8 +80,8 @@ export default class BookScanScreen extends React.Component {
                   </View>
                 }
               </Container>
-              <Container style={{ elevation: 4 }}>
-                <Button title="Tambah Buku" />
+              <Container>
+                <Button title="+ Tambah Buku" />
               </Container>
             </View>
           }

@@ -66,7 +66,9 @@ const MainNavigator = TabNavigator({
   // }
 }, {
   tabBarPosition: 'bottom',
-  animationEnabled: true,
+  animationEnabled: false,
+  lazy: true,
+  backBehavior: 'initialRoute',
   swipeEnabled: false,
   tabBarOptions: {
     activeTintColor: theme.teal,
