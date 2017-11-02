@@ -49,12 +49,9 @@ const MainNavigator = TabNavigator({
   // login: {
   //   screen: LoginScreen
   // },
-  chat: {
-    screen: ChatScreen
+  chatList: {
+    screen: ChatListScreen
   },
-  // chatList: {
-  //   screen: ChatListScreen
-  // },
   profile: {
     screen: ProfileScreen
   },
@@ -66,7 +63,7 @@ const MainNavigator = TabNavigator({
   // }
 }, {
   tabBarPosition: 'bottom',
-  animationEnabled: false,
+  animationEnabled: true,
   lazy: true,
   backBehavior: 'initialRoute',
   swipeEnabled: false,
@@ -104,6 +101,9 @@ const RootNavigator = StackNavigator({
   },
   bookScan: {
     screen: BookScanScreen,
+  },
+  chat: {
+    screen: ChatScreen
   },
 },
 {

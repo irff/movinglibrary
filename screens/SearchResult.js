@@ -14,14 +14,27 @@ import {
 import * as theme from '../constants/theme'
 import BookCoverPlaceholder from '../assets/images/BookCoverPlaceholder.jpg';
 
+import ExploreIcon from '../assets/images/icons/explore.png';
+import ExploreIconActive from '../assets/images/icons/explore-ac.png';
+
 import styled from 'styled-components/native'
 import { SearchBar } from 'react-native-elements'
 import BaseScreen from '../components/BaseScreen';
 
 export default class SearchResultScreen extends React.Component {
   static navigationOptions = {
-    tabBarLabel: 'Search',
-    tabBarIcon: null
+    tabBarLabel: 'Jelajah',
+    tabBarIcon: ({ tintColor }) => (tintColor === theme.teal ? (
+        <Image
+          source={ExploreIconActive}
+          style={{ width: 26, height: 26 }}
+        />
+      ) : (
+        <Image
+          source={ExploreIcon}
+          style={{ width: 26, height: 26 }}
+        />
+      )),
   };
 
   render() {
