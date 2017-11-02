@@ -36,18 +36,20 @@ class Meminjam extends React.Component {
   };
 
   componentDidMount() {
+  }
+  render() {
+    const { navigate } = this.props.screenProps.parentNavigation;
+
     if (this.props.store.userStore.user) {
       console.log("user loaded");
       this.props.store.pinjamanStore.getOrders();
       console.log("orders loaded");
     }
-  }
-  render() {
-    const { navigate } = this.props.screenProps.parentNavigation;
 
     return (
       <ScrollView>
         <Container>
+        {this.props.store.pinjamanStore.borrows.map(item =>
           <TouchableOpacity onPress={() => navigate('pinjamDetail')} activeOpacity={0.7}>
             <Card>
               <Image
@@ -57,56 +59,23 @@ class Meminjam extends React.Component {
               />
               <Flex style={{ padding: 12 }}>
                 <Bold style={{ color: theme.teal, fontSize: 14 }} numberOfLines={1}>Einstein: His Life and Universe</Bold>
-                <Text style={{ fontSize: 12 }}>WALTER ISAACSON</Text>
-                <Text style={{ fontSize: 12 }}><Bold>Ilyas Fahreza •</Bold> Beji, Depok</Text>
+                <Text style={{ fontSize: 12 }}>{item.book_isbn}</Text>
+                <Text style={{ fontSize: 12 }}><Bold>{item.user_id} •</Bold> Beji, Depok</Text>
                 <Flex style={{ justifyContent: 'flex-end' }}>
                   <Bold style={{ fontSize: 12, color: theme.muted }}>DIPESAN</Bold>
                 </Flex>
               </Flex>
             </Card>
           </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => navigate('pinjamDetail')} activeOpacity={0.7}>
-            <Card>
-              <Image
-                source={BookCoverPlaceholder}
-                style={{ height: 90, width: 70, borderTopLeftRadius: 2, borderBottomLeftRadius: 2 }}
-                resizeMode="cover"
-              />
-              <Flex style={{ padding: 12 }}>
-                <Bold style={{ color: theme.teal, fontSize: 14 }} numberOfLines={1}>Einstein: His Life and Universe</Bold>
-                <Text style={{ fontSize: 12 }}>WALTER ISAACSON</Text>
-                <Text style={{ fontSize: 12 }}><Bold>Ilyas Fahreza •</Bold> Beji, Depok</Text>
-                <Flex style={{ justifyContent: 'flex-end' }}>
-                  <Bold style={{ fontSize: 12, color: theme.muted }}>DIPESAN</Bold>
-                </Flex>
-              </Flex>
-            </Card>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => navigate('pinjamDetail')} activeOpacity={0.7}>
-            <Card>
-              <Image
-                source={BookCoverPlaceholder}
-                style={{ height: 90, width: 70, borderTopLeftRadius: 2, borderBottomLeftRadius: 2 }}
-                resizeMode="cover"
-              />
-              <Flex style={{ padding: 12 }}>
-                <Bold style={{ color: theme.teal, fontSize: 14 }} numberOfLines={1}>Einstein: His Life and Universe</Bold>
-                <Text style={{ fontSize: 12 }}>WALTER ISAACSON</Text>
-                <Text style={{ fontSize: 12 }}><Bold>Ilyas Fahreza •</Bold> Beji, Depok</Text>
-                <Flex style={{ justifyContent: 'flex-end' }}>
-                  <Bold style={{ fontSize: 12, color: theme.muted }}>DIPESAN</Bold>
-                </Flex>
-              </Flex>
-            </Card>
-          </TouchableOpacity>
+        )}
         </Container>
       </ScrollView>
     );
   }
 }
 
+@inject('store')
+@observer
 class Dipinjam extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Dipinjam',
@@ -116,9 +85,16 @@ class Dipinjam extends React.Component {
   render() {
     const { navigate } = this.props.screenProps.parentNavigation;
 
+    if (this.props.store.userStore.user) {
+      console.log("user loaded");
+      this.props.store.pinjamanStore.getOrders();
+      console.log("orders loaded");
+    }
+
     return (
       <ScrollView>
       <Container>
+      {this.props.store.pinjamanStore.lends.map(item =>
         <TouchableOpacity onPress={() => navigate('pinjamDetail')} activeOpacity={0.7}>
           <Card>
             <Image
@@ -128,32 +104,15 @@ class Dipinjam extends React.Component {
             />
             <Flex style={{ padding: 12 }}>
               <Bold style={{ color: theme.teal, fontSize: 14 }} numberOfLines={1}>Einstein: His Life and Universe</Bold>
-              <Text style={{ fontSize: 12 }}>WALTER ISAACSON</Text>
-              <Text style={{ fontSize: 12 }}><Bold>Ilyas Fahreza •</Bold> Beji, Depok</Text>
+              <Text style={{ fontSize: 12 }}>{item.book_isbn}</Text>
+              <Text style={{ fontSize: 12 }}><Bold>{item.user_id} •</Bold> Beji, Depok</Text>
               <Flex style={{ justifyContent: 'flex-end' }}>
                 <Bold style={{ fontSize: 12, color: theme.muted }}>DIPESAN</Bold>
               </Flex>
             </Flex>
           </Card>
         </TouchableOpacity>
-
-        <TouchableOpacity onPress={() => navigate('pinjamDetail')} activeOpacity={0.7}>
-          <Card>
-            <Image
-              source={BookCoverPlaceholder}
-              style={{ height: 90, width: 70, borderTopLeftRadius: 2, borderBottomLeftRadius: 2 }}
-              resizeMode="cover"
-            />
-            <Flex style={{ padding: 12 }}>
-              <Bold style={{ color: theme.teal, fontSize: 14 }} numberOfLines={1}>Einstein: His Life and Universe</Bold>
-              <Text style={{ fontSize: 12 }}>WALTER ISAACSON</Text>
-              <Text style={{ fontSize: 12 }}><Bold>Ilyas Fahreza •</Bold> Beji, Depok</Text>
-              <Flex style={{ justifyContent: 'flex-end' }}>
-                <Bold style={{ fontSize: 12, color: theme.muted }}>DIPESAN</Bold>
-              </Flex>
-            </Flex>
-          </Card>
-        </TouchableOpacity>
+      )}
       </Container>
     </ScrollView>
     );

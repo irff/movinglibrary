@@ -59,7 +59,9 @@ class PinjamanStore {
 
   @observable lends = [];
   @observable borrows = [];
-  async getOrders(user_id) {
+  @observable order;
+
+  async getOrders() {
     let token = this.rootStore.userStore.user.token;
     console.log("token=" + token);
 
@@ -79,7 +81,28 @@ class PinjamanStore {
     console.log("lends=" + this.lends);
     console.log("borrows=" + this.borrows);
   }
+
+  async getOrder(order_id) {
+    let token = this.rootStore.userStore.user.token;
+    console.log("token=" + token);
+
+    let headers = {
+      "Content-Type": "application/json",
+      "Authorization": token
+    };
+
+    let response = await fetch(API_URL + 'orders/' + order_id, {
+      method: 'get',
+      headers: new Headers(headers)
+    });
+
+    let response_json = await response.json();
+    this.order = response_json;
+  }
 }
+
+
+
 
 class UserStore {
   constructor(rootStore) {
