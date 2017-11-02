@@ -21,6 +21,7 @@ import BookScanScreen from './screens/BookScan';
 import BookDetailScreen from './screens/BookDetail';
 import PinjamanScreen from './screens/Pinjaman';
 import CollectionScreen from './screens/Collection';
+import PinjamDetailScreen from './screens/PinjamDetail';
 
 const HomeNavigator = StackNavigator({
   explore: {
@@ -92,6 +93,9 @@ const RootNavigator = StackNavigator({
   },
   bookDetail: {
     screen: BookDetailScreen,
+  },
+  pinjamDetail: {
+    screen: PinjamDetailScreen,
   },
   checkout: {
     screen: CheckoutScreen,
