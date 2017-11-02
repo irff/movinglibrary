@@ -19,6 +19,9 @@ import Button, {SecondaryButton} from '../components/Button';
 import * as theme from '../constants/theme'
 import BookCoverPlaceholder from '../assets/images/BookCoverPlaceholder.jpg';
 
+import PinjamIcon from '../assets/images/icons/pinjam.png';
+import PinjamIconActive from '../assets/images/icons/pinjam-ac.png';
+
 import styled from 'styled-components/native'
 import { SearchBar, Divider, Avatar } from 'react-native-elements'
 import BaseScreen from '../components/BaseScreen';
@@ -26,7 +29,7 @@ import BaseScreen from '../components/BaseScreen';
 class Meminjam extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Meminjam',
-    tabBarIcon: null
+    tabBarIcon: null,
   };
 
   render() {
@@ -174,7 +177,17 @@ const PinjamanNavigator = TabNavigator({
 export default class PinjamanScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Pinjaman',
-    tabBarIcon: null
+    tabBarIcon: ({ tintColor }) => (tintColor === theme.teal ? (
+        <Image
+          source={PinjamIconActive}
+          style={{ width: 26, height: 26 }}
+        />
+      ) : (
+        <Image
+          source={PinjamIcon}
+          style={{ width: 26, height: 26 }}
+        />
+      )),
   };
 
   state = {

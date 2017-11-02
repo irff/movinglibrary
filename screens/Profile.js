@@ -17,6 +17,9 @@ import Button, {SecondaryButton} from '../components/Button';
 import * as theme from '../constants/theme'
 import BookCoverPlaceholder from '../assets/images/BookCoverPlaceholder.jpg';
 
+import ProfileIcon from '../assets/images/icons/profile.png';
+import ProfileIconActive from '../assets/images/icons/profile-ac.png';
+
 import styled from 'styled-components/native'
 import { SearchBar, Divider, Avatar } from 'react-native-elements'
 import { mix } from 'polished'
@@ -25,8 +28,18 @@ import BaseScreen from '../components/BaseScreen';
 
 export default class ProfileScreen extends React.Component {
   static navigationOptions = {
-    tabBarLabel: 'Profile',
-    tabBarIcon: null
+    tabBarLabel: 'Profil',
+    tabBarIcon: ({ tintColor }) => (tintColor === theme.teal ? (
+        <Image
+          source={ProfileIconActive}
+          style={{ width: 26, height: 26 }}
+        />
+      ) : (
+        <Image
+          source={ProfileIcon}
+          style={{ width: 26, height: 26 }}
+        />
+      )),
   };
 
   render() {

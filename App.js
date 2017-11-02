@@ -48,16 +48,15 @@ const MainNavigator = TabNavigator({
   // login: {
   //   screen: LoginScreen
   // },
-  // chat: {
-  //   screen: ChatScreen
-  // },
+  chat: {
+    screen: ChatScreen
+  },
   // chatList: {
   //   screen: ChatListScreen
   // },
   profile: {
     screen: ProfileScreen
   },
-  
   // search: {
   //   screen: SearchScreen
   // },
@@ -71,10 +70,13 @@ const MainNavigator = TabNavigator({
   backBehavior: 'initialRoute',
   swipeEnabled: false,
   tabBarOptions: {
+    showIcon: true,
     activeTintColor: theme.teal,
     inactiveTintColor: theme.muted,
     labelStyle: {
-      fontSize: 12,
+      fontSize: 8,
+      fontFamily: 'cerebri-extra-bold',
+      margin: 0,
     },
     style: {
       backgroundColor: theme.white,

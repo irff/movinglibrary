@@ -12,17 +12,30 @@ import {
   Flex,
 } from '../components/common';
 
-import { SearchBar } from 'react-native-elements'
-import IlluBisnis from '../assets/illustrations/bisnis.png'
+import { SearchBar } from 'react-native-elements';
+import IlluBisnis from '../assets/illustrations/bisnis.png';
 import BookCoverPlaceholder from '../assets/images/BookCoverPlaceholder.jpg';
+
+import ExploreIcon from '../assets/images/icons/explore.png';
+import ExploreIconActive from '../assets/images/icons/explore-ac.png';
 
 import BaseScreen from '../components/BaseScreen';
 import styled from 'styled-components/native';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
-    tabBarLabel: 'Home',
-    tabBarIcon: null
+    tabBarLabel: 'Jelajah',
+    tabBarIcon: ({ tintColor }) => (tintColor === theme.teal ? (
+        <Image
+          source={ExploreIconActive}
+          style={{ width: 26, height: 26 }}
+        />
+      ) : (
+        <Image
+          source={ExploreIcon}
+          style={{ width: 26, height: 26 }}
+        />
+      )),
   };
 
   render() {
@@ -70,7 +83,6 @@ export default class HomeScreen extends React.Component {
               />
               <CategoryTitle>Bisnis</CategoryTitle>
             </View>
-            
             <View style={{ borderRadius: 4, width: 111, height: 68, marginRight: 8 }}>
               <Image
                 source={IlluBisnis}
@@ -86,9 +98,7 @@ export default class HomeScreen extends React.Component {
               />
               <CategoryTitle>Bisnis</CategoryTitle>
             </View>
-
           </ScrollView>
-          
           <Container>
             <Row style={{ marginTop: 32 }}>
               <Heading style={{ fontSize: 20 }}>Buku Populer</Heading>
@@ -177,4 +187,4 @@ const CategoryTitle = styled(Bold)`
   color: ${theme.white};
   margin-left: 4;
   margin-top: 4;
-`
+`;

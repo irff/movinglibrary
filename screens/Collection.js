@@ -17,6 +17,9 @@ import Button, {SecondaryButton} from '../components/Button';
 import * as theme from '../constants/theme'
 import BookCoverPlaceholder from '../assets/images/BookCoverPlaceholder.jpg';
 
+import KoleksiIcon from '../assets/images/icons/koleksi.png';
+import KoleksiIconActive from '../assets/images/icons/koleksi-ac.png';
+
 import styled from 'styled-components/native'
 import { SearchBar, Divider, Avatar } from 'react-native-elements'
 import { lighten, desaturate } from 'polished'
@@ -26,7 +29,17 @@ import BaseScreen from '../components/BaseScreen';
 export default class CollectionScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Koleksi',
-    tabBarIcon: null
+    tabBarIcon: ({ tintColor }) => (tintColor === theme.teal ? (
+        <Image
+          source={KoleksiIconActive}
+          style={{ width: 26, height: 26 }}
+        />
+      ) : (
+        <Image
+          source={KoleksiIcon}
+          style={{ width: 26, height: 26 }}
+        />
+      )),
   };
 
   render() {
