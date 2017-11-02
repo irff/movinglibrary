@@ -29,7 +29,7 @@ class UserStore {
     this.rootStore = rootStore;
   }
 
-  @observable user;
+  @observable user = null;
 
   async auth_facebook() {
     const { type, token } = await Expo.Facebook.logInWithReadPermissionsAsync('2015209295401440', {
@@ -46,12 +46,10 @@ class UserStore {
       // Get the user's name using Facebook's Graph API
       const response = await fetch(
         `https://graph.facebook.com/me?access_token=${access_token}`);
-      Alert.alert(
-        'Logged in!',
-        `Hi ${(await response.json()).name}!`,
-      );
-
-      console.log("TOKEN=" + access_token);
+      // Alert.alert(
+      //   'Logged in!',
+      //   `Hi ${(await response.json()).name}!`,
+      // );
       return access_token;
     }
     return null;
@@ -76,14 +74,13 @@ class UserStore {
     return response_json;
   }
 
-  async auth() {
+  async auth(cb) {
     let access_token = await this.auth_facebook();
     if(access_token != null) {
-      console.log("TOKEN RECEIVED=" + access_token);
       user = await this.auth_backend(access_token);
-      console.log("USER=" + JSON.stringify(user));
-
+      this.user = user;
       // TODO: save user to store
+      cb();
     }
   }
 }

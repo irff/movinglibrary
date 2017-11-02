@@ -91,6 +91,9 @@ const MainNavigator = TabNavigator({
 });
 
 const RootNavigator = StackNavigator({
+  login: {
+    screen: LoginScreen,
+  },
   main: {
     screen: MainNavigator,
   },
@@ -112,7 +115,7 @@ const RootNavigator = StackNavigator({
 },
 {
   headerMode: 'none',
-  initialRouteName: 'main',
+  initialRouteName: 'login',
   navigationOptions: {
     gesturesEnabled: false,
   },

@@ -21,7 +21,10 @@ import ExploreIconActive from '../assets/images/icons/explore-ac.png';
 
 import BaseScreen from '../components/BaseScreen';
 import styled from 'styled-components/native';
+import { observer, inject } from 'mobx-react';
 
+@inject('store')
+@observer
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Jelajah',
@@ -53,7 +56,7 @@ export default class HomeScreen extends React.Component {
         />
         <ScrollView style={{ backgroundColor: theme.white }}>
           <Container>
-            <Heading>Hai, Irfan!</Heading>
+            <Heading>Hai, {this.props.store.userStore.user.user.name.split(' ')[0]}!</Heading>
             <Text style={{ fontSize: 14 }}>Jelajahi kategori buku yang kamu inginkan </Text>
           </Container>
           <ScrollView horizontal style={{ flexGrow: 0, flexShrink: 0, backgroundColor: theme.white }}>
