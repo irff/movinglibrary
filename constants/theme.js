@@ -6,3 +6,5 @@ export const muted = '#666';
 export const grey = '#999';
 export const divider = '#ddd';
 export const black = '#5b5b5b';
+export const redRating = '#FF6663';
+export const greenRating = '#82EA62';
