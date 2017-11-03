@@ -21,7 +21,7 @@ import BaseScreen from '../components/BaseScreen';
 
 export default class ChatList extends React.Component {
   static navigationOptions = {
-    tabBarLabel: 'Chat',
+    tabBarLabel: 'Pesan',
     tabBarIcon: ({ tintColor }) => (tintColor === theme.teal ? (
         <Image
           source={PesanIconActive}
@@ -42,8 +42,8 @@ export default class ChatList extends React.Component {
       <BaseScreen>
         <ScrollView>
           <Container>
-            <Heading>Chat</Heading>
-            <Row style={{ marginTop: 100, flexDirection: 'column' }}>
+            <Heading>Pesan</Heading>
+            <Row style={{ marginTop: 64, flexDirection: 'column' }}>
               <TouchableOpacity onPress={() => navigate('chat')} activeOpacity={0.7}>
                 <View style={{ flexWrap: 'wrap', flexDirection: 'row', justifyContent: 'flex-start', alignItems: 'flex-start', paddingTop: 16, paddingBottom: 16, borderBottomColor: theme.divider, borderBottomWidth: 1 }}>
                   <Image

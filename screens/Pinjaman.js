@@ -51,19 +51,19 @@ class Meminjam extends React.Component {
       <ScrollView>
         <Container>
         {this.state.loaded && this.props.store.pinjamanStore.borrows.map(item =>
-          <TouchableOpacity onPress={() => navigate('pinjamDetail')} activeOpacity={0.7}>
+          <TouchableOpacity onPress={() => navigate('pinjamDetail', { record: item })} activeOpacity={0.7} key={item.id}>
             <Card>
               <Image
-                source={BookCoverPlaceholder}
+                source={{ uri: item.book.image }}
                 style={{ height: 90, width: 70, borderTopLeftRadius: 2, borderBottomLeftRadius: 2 }}
                 resizeMode="cover"
               />
               <Flex style={{ padding: 12 }}>
-                <Bold style={{ color: theme.teal, fontSize: 14 }} numberOfLines={1}>Einstein: His Life and Universe</Bold>
-                <Text style={{ fontSize: 12 }}>{item.book_isbn}</Text>
-                <Text style={{ fontSize: 12 }}><Bold>{item.user_id} •</Bold> Beji, Depok</Text>
+                <Bold style={{ color: theme.teal, fontSize: 14 }} numberOfLines={1}>{item.book.title}</Bold>
+                <Text style={{ fontSize: 12 }}>{item.book.authors}</Text>
+                <Text style={{ fontSize: 12 }}><Bold>{item.library.user.name} •</Bold> Beji, Depok</Text>
                 <Flex style={{ justifyContent: 'flex-end' }}>
-                  <Bold style={{ fontSize: 12, color: theme.muted }}>DIPESAN</Bold>
+                  <Bold style={{ fontSize: 12, color: theme.muted }}>{item.status}</Bold>
                 </Flex>
               </Flex>
             </Card>
@@ -99,19 +99,19 @@ class Dipinjam extends React.Component {
       <ScrollView>
       <Container>
       {this.state.loaded && this.props.store.pinjamanStore.lends.map(item =>
-        <TouchableOpacity onPress={() => navigate('pinjamDetail')} activeOpacity={0.7}>
+        <TouchableOpacity onPress={() => navigate('pinjamDetail', { record: item })} activeOpacity={0.7} key={item.id}>
           <Card>
             <Image
-              source={BookCoverPlaceholder}
+              source={{ uri: item.book.image }}
               style={{ height: 90, width: 70, borderTopLeftRadius: 2, borderBottomLeftRadius: 2 }}
               resizeMode="cover"
             />
             <Flex style={{ padding: 12 }}>
-              <Bold style={{ color: theme.teal, fontSize: 14 }} numberOfLines={1}>Einstein: His Life and Universe</Bold>
-              <Text style={{ fontSize: 12 }}>{item.book_isbn}</Text>
-              <Text style={{ fontSize: 12 }}><Bold>{item.user_id} •</Bold> Beji, Depok</Text>
+              <Bold style={{ color: theme.teal, fontSize: 14 }} numberOfLines={1}>{item.book.title}</Bold>
+              <Text style={{ fontSize: 12 }}>{item.book.authors}</Text>
+              <Text style={{ fontSize: 12 }}><Bold>{item.library.user.name} •</Bold> Beji, Depok</Text>
               <Flex style={{ justifyContent: 'flex-end' }}>
-                <Bold style={{ fontSize: 12, color: theme.muted }}>DIPESAN</Bold>
+                <Bold style={{ fontSize: 12, color: theme.muted }}>{item.status}</Bold>
               </Flex>
             </Flex>
           </Card>

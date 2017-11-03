@@ -22,7 +22,10 @@ import styled from 'styled-components/native'
 import { SearchBar, Divider, Avatar } from 'react-native-elements'
 import Rating from 'react-native-lottie-rating';
 import BaseScreen from '../components/BaseScreen';
+import { observer, inject } from 'mobx-react';
 
+@inject('store')
+@observer
 export default class ReviewScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Search',
@@ -31,6 +34,7 @@ export default class ReviewScreen extends React.Component {
 
   render() {
     const { navigate, goBack } = this.props.navigation;
+    const { record } = this.props.navigation.state.params;
 
     return (
       <BaseScreen>
@@ -43,18 +47,39 @@ export default class ReviewScreen extends React.Component {
           <Container>
             <Heading style={{ marginBottom: 16 }}>Tulis Review</Heading>
 
-            <Bold style={{ fontSize: 16, marginBottom: 12 }}>Pemilik Buku</Bold>
-            <Row style={{ alignItems: 'center' }}>
-              <Avatar
-                large
-                rounded
-                source={{uri: "http://i.pravatar.cc/300"}}
-              />
-              <Flex style={{ marginLeft: 18 }}>
-                <Text style={{ fontSize: 18 }}>Tito Syahreza</Text>
-                <Text>Jakarta, Indonesia</Text>
-              </Flex>
-            </Row>
+            {record.user_id === this.props.store.userStore.user.user.id &&
+              <View>
+                <Bold style={{ fontSize: 16, marginBottom: 12 }}>Pemilik Buku</Bold>
+                <Row style={{ alignItems: 'center' }}>
+                  <Avatar
+                    large
+                    rounded
+                    source={{uri: record.library.user.avatar}}
+                  />
+                  <Flex style={{ marginLeft: 18 }}>
+                    <Text style={{ fontSize: 18 }}>{record.library.user.name}</Text>
+                    <Text>Jakarta, Indonesia</Text>
+                  </Flex>
+                </Row>
+              </View>
+            }
+
+            {record.user_id !== this.props.store.userStore.user.user.id &&
+              <View>
+                <Bold style={{ fontSize: 16, marginBottom: 12 }}>Peminjam Buku</Bold>
+                <Row style={{ alignItems: 'center' }}>
+                  <Avatar
+                    large
+                    rounded
+                    source={{uri: record.user.avatar }}
+                  />
+                  <Flex style={{ marginLeft: 18 }}>
+                    <Text style={{ fontSize: 18 }}>{record.user.name}</Text>
+                    <Text>Jakarta, Indonesia</Text>
+                  </Flex>
+                </Row>
+              </View>
+            }
 
             <Bold style={{ fontSize: 16, marginTop: 32, marginBottom: 12 }}>Data Buku</Bold>
             <Card>
@@ -77,7 +102,7 @@ export default class ReviewScreen extends React.Component {
         </ScrollView>
         <Container style={{ backgroundColor: theme.white, elevation: 4 }}>
           <View style={{ alignItems: 'center', marginBottom: 16 }}>
-            <Text style={{ marginBottom: 8 }}>Beri nilai untuk <Bold>Tito Syahreza</Bold></Text>
+            <Text style={{ marginBottom: 8 }}>Beri nilai untuk <Bold>{record.user_id === this.props.store.userStore.user.user.id ? record.library.user.name : record.user.name}</Bold></Text>
             <Rating />
           </View>
         </Container>

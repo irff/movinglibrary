@@ -91,7 +91,7 @@ export default class BookDetailScreen extends React.Component {
         <Container style={{ backgroundColor: theme.white, elevation: 4 }}>
           <Row>
             <Flex>
-              <Button title="Pinjam" onPress={() => navigate('checkout')} />
+              <Button title="Pinjam" onPress={() => navigate('checkout', { record })} />
             </Flex>
           </Row>
         </Container>

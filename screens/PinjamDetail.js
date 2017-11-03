@@ -21,7 +21,10 @@ import BookCoverPlaceholder from '../assets/images/BookCoverPlaceholder.jpg';
 import styled from 'styled-components/native'
 import { SearchBar, Divider, Avatar } from 'react-native-elements'
 import BaseScreen from '../components/BaseScreen';
+import { observer, inject } from 'mobx-react';
 
+@inject('store')
+@observer
 export default class PinjamDetailScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Search',
@@ -46,6 +49,7 @@ export default class PinjamDetailScreen extends React.Component {
 
   render() {
     const { navigate, goBack } = this.props.navigation;
+    const { record } = this.props.navigation.state.params;
 
     return (
       <BaseScreen>
@@ -58,35 +62,51 @@ export default class PinjamDetailScreen extends React.Component {
           <Container style={{ backgroundColor: theme.darkTeal, height: 120, position: 'absolute', left: 0, right: 0 }} />
           <View style={{ elevation: 4, width: 147, height: 224, alignSelf: 'center' }}>
             <Image
-              source={BookCoverPlaceholder}
+              source={{ uri: record.book.image }}
               style={{ width: 147, height: 224 }}
             />
           </View>
           <View style={{ alignItems: 'center', padding: 16 }}>
-            <Bold style={{ color: theme.teal, fontSize: 20 }}>Einstein: His Life and Universe</Bold>
-            <Text style={{ marginBottom: 12 }}>WALTER ISAACSON</Text>
-            <Text style={{ color: theme.muted, fontSize: 12 }}>2007 · Oxford Publication · English</Text>
+            <Bold style={{ color: theme.teal, fontSize: 20 }}>{record.book.title}</Bold>
+            <Text style={{ marginBottom: 12 }}>{record.book.authors.toUpperCase()}</Text>
+            <Text style={{ color: theme.muted, fontSize: 12 }}>2010 · Oxford Publication · {record.book.language === 'id' ? 'Bahasa Indonesia': 'English'}</Text>
           </View>
 
           <Container>
-            <Row>
-              <Flex style={{ marginRight: 12 }}>
-                <Bold style={{ fontSize: 16 }}>Pemilik Buku</Bold>
-                <Text><Bold>Tito •</Bold> Tebet, Jakarta Selatan</Text>
-                <Text style={{ fontSize: 12, color: theme.teal }}>0,5 KM</Text>
-              </Flex>
-              <Avatar
-                large
-                rounded
-                source={{uri: "http://i.pravatar.cc/300"}}
-              />
-            </Row>
+            {record.user_id === this.props.store.userStore.user.user.id &&
+              <Row>
+                <Flex style={{ marginRight: 12 }}>
+                  <Bold style={{ fontSize: 16 }}>Pemilik Buku</Bold>
+                  <Text><Bold>{record.library.user.name} •</Bold> Tebet, Jakarta Selatan</Text>
+                  <Text style={{ fontSize: 12, color: theme.teal }}>0,5 KM</Text>
+                </Flex>
+                <Avatar
+                  large
+                  rounded
+                  source={{uri: record.library.user.avatar }}
+                />
+              </Row>
+            }
+            {record.user_id !== this.props.store.userStore.user.user.id &&
+              <Row>
+                <Flex style={{ marginRight: 12 }}>
+                  <Bold style={{ fontSize: 16 }}>Peminjam Buku</Bold>
+                  <Text><Bold>{record.user.name} •</Bold> Tebet, Jakarta Selatan</Text>
+                  <Text style={{ fontSize: 12, color: theme.teal }}>0,5 KM</Text>
+                </Flex>
+                <Avatar
+                  large
+                  rounded
+                  source={{uri: record.user.avatar }}
+                />
+              </Row>
+            }
           </Container>
 
           <Divider style={{ backgroundColor: theme.divider, height: 2, marginLeft: 16, marginRight: 16 }} />
 
           <Container>
-            <Timeline 
+            <Timeline
               data={this.data}
               circleColor={theme.teal}
               lineColor={theme.teal}
@@ -98,7 +118,7 @@ export default class PinjamDetailScreen extends React.Component {
         <Container style={{ backgroundColor: theme.white, elevation: 4 }}>
           <Row>
             <Flex>
-              <Button title="Dikembalikan" onPress={() => navigate('review')} />
+              <Button title="Dikembalikan" onPress={() => navigate('review', { record })} />
             </Flex>
           </Row>
         </Container>

@@ -23,7 +23,7 @@ import BaseScreen from '../components/BaseScreen';
 
 export default class ChatScreen extends React.Component {
   static navigationOptions = {
-    tabBarLabel: 'Chat',
+    tabBarLabel: 'Pesan',
     tabBarIcon: ({ tintColor }) => (tintColor === theme.teal ? (
         <Image
           source={PesanIconActive}

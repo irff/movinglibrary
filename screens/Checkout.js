@@ -20,7 +20,10 @@ import BookCoverPlaceholder from '../assets/images/BookCoverPlaceholder.jpg';
 import styled from 'styled-components/native'
 import { SearchBar, Divider, Avatar } from 'react-native-elements'
 import BaseScreen from '../components/BaseScreen';
+import { observer, inject } from 'mobx-react';
 
+@inject('store')
+@observer
 export default class CheckoutScreen extends React.Component {
   static navigationOptions = {
     tabBarLabel: 'Search',
@@ -33,8 +36,20 @@ export default class CheckoutScreen extends React.Component {
     returnMethod: 'meet',
   };
 
+  checkout = async () => {
+    const { record } = this.props.navigation.state.params;
+    await this.props.store.pinjamanStore.createOrder({
+      record_id: record.id,
+      delivery_method: this.state.deliveryMethod,
+      return_method: this.state.returnMethod,
+    })
+    this.props.navigation.navigate('pinjaman')
+  }
+
   render() {
     const { navigate, goBack } = this.props.navigation;
+    const { record } = this.props.navigation.state.params;
+    const { user } = this.props.store.userStore.user;
 
     return (
       <BaseScreen>
@@ -48,33 +63,33 @@ export default class CheckoutScreen extends React.Component {
             <Heading style={{ marginBottom: 12 }}>Isi Data Peminjamanmu</Heading>
             <Bold style={{ fontSize: 16 }}>Data Kamu</Bold>
             <SectionHeading>NAMA LENGKAP</SectionHeading>
-            <SectionText disabled>Shylla Estee Pramadhani</SectionText>
+            <SectionText disabled>{user.name}</SectionText>
             <SectionHeading>ALAMAT</SectionHeading>
             <SectionText disabled numberOfLines={1}>Unit 19 Tower A, Apartemen Taman Melati</SectionText>
             <SectionHeading>KOTA</SectionHeading>
             <SectionText disabled>Depok</SectionText>
           </Container>
-          
+
           <Divider style={{ backgroundColor: theme.divider, height: 2, marginLeft: 16, marginRight: 16 }} />
-          
+
           <Container>
             <Bold style={{ fontSize: 16, marginBottom: 8 }}>Data Buku</Bold>
             <Card>
               <Image
-                source={BookCoverPlaceholder}
+                source={{ uri: record.book.image }}
                 style={{ height: 90, width: 70, borderTopLeftRadius: 2, borderBottomLeftRadius: 2 }}
                 resizeMode="cover"
               />
               <Flex style={{ padding: 12 }}>
-                <Bold style={{ color: theme.teal, fontSize: 14 }} numberOfLines={1}>Einstein: His Life and Universe</Bold>
-                <Text style={{ fontSize: 12 }}>WALTER ISAACSON</Text>
-                <Text style={{ fontSize: 12 }}><Bold>Ilyas Fahreza •</Bold> Beji, Depok</Text>
+                <Bold style={{ color: theme.teal, fontSize: 14 }} numberOfLines={1}>{record.book.title}</Bold>
+                <Text style={{ fontSize: 12 }}>{record.book.authors.toUpperCase()}</Text>
+                <Text style={{ fontSize: 12 }}><Bold>{record.library.user.name} •</Bold> Beji, Depok</Text>
               </Flex>
             </Card>
           </Container>
 
           <Divider style={{ backgroundColor: theme.divider, height: 2, marginLeft: 16, marginRight: 16 }} />
-          
+
           <Container>
             <Bold style={{ fontSize: 16 }}>Data Peminjaman</Bold>
             <SectionHeading>LAMA PEMINJAMAN</SectionHeading>
@@ -101,12 +116,12 @@ export default class CheckoutScreen extends React.Component {
               <Picker.Item label="JNE" value="jne" />
             </Picker>
           </Container>
-          
+
           <Container>
             <Row>
               <Flex />
               <Flex>
-                <Button title="Lanjut" />
+                <Button title="Lanjut" onPress={this.checkout}/>
               </Flex>
             </Row>
           </Container>

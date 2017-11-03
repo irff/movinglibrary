@@ -44,7 +44,7 @@ export default class HomeScreen extends React.Component {
   state = {
     loaded: false
   }
-  
+
   async componentDidMount() {
     await this.props.store.homeStore.fetchHome();
     this.setState({ loaded: true })
@@ -53,6 +53,8 @@ export default class HomeScreen extends React.Component {
   search = e => {
     this.props.navigation.navigate('searchResult', { query: e.nativeEvent.text })
   }
+
+  categories = ['Bisnis', 'Edukasi', 'Fiksi', 'Biografi', 'Agama', 'Travel', 'Hobi', 'Kesehatan']
 
   render() {
     const { navigate } = this.props.navigation;
@@ -75,46 +77,17 @@ export default class HomeScreen extends React.Component {
           </Container>
           <ScrollView horizontal style={{ flexGrow: 0, flexShrink: 0, backgroundColor: theme.white }}>
             <View style={{ width: 16 }} />
-            <TouchableOpacity onPress={() => navigate('searchResult', {query: 'Bisnis'} )}>
-              <View style={{ borderRadius: 4, width: 111, height: 68, marginRight: 8 }}>
-                <Image
-                  source={IlluBisnis}
-                  style={{ position: 'absolute', width: 111, height: 68, borderRadius: 4 }}
-                />
-                <CategoryTitle>Bisnis</CategoryTitle>
-              </View>
-            </TouchableOpacity>
-
-            <View style={{ borderRadius: 4, width: 111, height: 68, marginRight: 8 }}>
-              <Image
-                source={IlluBisnis}
-                style={{ position: 'absolute', width: 111, height: 68, borderRadius: 4 }}
-              />
-              <CategoryTitle>Bisnis</CategoryTitle>
-            </View>
-
-            <View style={{ borderRadius: 4, width: 111, height: 68, marginRight: 8 }}>
-              <Image
-                source={IlluBisnis}
-                style={{ position: 'absolute', width: 111, height: 68, borderRadius: 4 }}
-              />
-              <CategoryTitle>Bisnis</CategoryTitle>
-            </View>
-            <View style={{ borderRadius: 4, width: 111, height: 68, marginRight: 8 }}>
-              <Image
-                source={IlluBisnis}
-                style={{ position: 'absolute', width: 111, height: 68, borderRadius: 4 }}
-              />
-              <CategoryTitle>Bisnis</CategoryTitle>
-            </View>
-
-            <View style={{ borderRadius: 4, width: 111, height: 68, marginRight: 8 }}>
-              <Image
-                source={IlluBisnis}
-                style={{ position: 'absolute', width: 111, height: 68, borderRadius: 4 }}
-              />
-              <CategoryTitle>Bisnis</CategoryTitle>
-            </View>
+            {this.categories.map(cat =>
+              <TouchableOpacity onPress={() => navigate('searchResult', {query: cat} )} key={cat}>
+                <View style={{ borderRadius: 4, width: 111, height: 68, marginRight: 8 }}>
+                  <Image
+                    source={IlluBisnis}
+                    style={{ position: 'absolute', width: 111, height: 68, borderRadius: 4 }}
+                  />
+                  <CategoryTitle>{cat}</CategoryTitle>
+                </View>
+              </TouchableOpacity>
+            )}
           </ScrollView>
           <Container>
             <Row style={{ marginTop: 32 }}>

@@ -1,5 +1,11 @@
 {
   "expo": {
-    "sdkVersion": "21.0.0"
+    "sdkVersion": "21.0.0",
+    "name": "Moving Library",
+    "slug": "moving-library",
+    "version": "0.1.0",
+    "android": {
+      "package": "id.movinglibrary.app"
+    }
   }
 }

@@ -22,13 +22,15 @@ class HomeStore {
   @observable searchResult = []
 
   async fetchHome() {
+    const shuffleArray = arr => arr.sort(() => Math.random() - 0.5)
     const response = await fetch(`${API_URL}records`, {
       headers: {
         Authorization: this.rootStore.userStore.user.token,
       }
     })
     const response_json = await response.json()
-    this.popular = this.latest = response_json.records.filter(r => !!r.book.image)
+    this.popular = shuffleArray(response_json.records.filter(r => !!r.book.image))
+    this.latest = response_json.records.filter(r => !!r.book.image)
   }
 
   async search(query) {
@@ -122,6 +124,25 @@ class PinjamanStore {
 
     let response_json = await response.json();
     this.order = response_json;
+  }
+
+  async createOrder(data) {
+    let token = this.rootStore.userStore.user.token;
+
+    let headers = {
+      "Content-Type": "application/json",
+      "Authorization": token
+    };
+
+    let response = await fetch(API_URL + 'orders', {
+      method: 'post',
+      headers: new Headers(headers),
+      body: JSON.stringify(data)
+    });
+
+    let response_json = await response.json();
+    await this.rootStore.pinjamanStore.getOrders()
+    await this.getOrders()
   }
 }
 
